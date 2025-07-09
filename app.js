@@ -18,7 +18,7 @@ connectDB();
 // Middlewares
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:5173"],
+    origin: ["http://localhost:3000", "http://localhost:5173", "https://store-frontend-two.vercel.app"],
     credentials: true,
   })
 );
@@ -34,10 +34,10 @@ app.get("/", (req, res) => {
 });
 
 //Server
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// const PORT = process.env.PORT || 8080;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
 
-// module.exports = app;
+ module.exports = app;
 
