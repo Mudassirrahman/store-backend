@@ -9,10 +9,15 @@ const addProduct = async (req, res) => {
       return res.status(400).json({ message: "Name and price are required" });
     }
 
+    const imageBase64 = req.file.buffer.toString("base64");
+    const imageMimeType = req.file.mimetype;
+
     const newProduct = new Product({
       name,
       description,
       price,
+      imageBase64,
+      imageMimeType,
       createdBy: req.user._id,
     });
 

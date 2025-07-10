@@ -8,6 +8,7 @@ const {
 
 const authenticateUser = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
+const upload = require("../middleware/upload")
 
 const router = express.Router();
 
@@ -15,7 +16,7 @@ const router = express.Router();
 router.get("/", getAllProducts);
 
 //  POST - Admin only
-router.post("/", authenticateUser, roleMiddleware("admin"), addProduct);
+router.post("/", authenticateUser, roleMiddleware("admin"), upload.single("image"), addProduct);
 
 //  PUT - Admin only
 router.put("/:id", authenticateUser, roleMiddleware("admin"), updateProduct);

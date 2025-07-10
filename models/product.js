@@ -13,6 +13,9 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    imageBase64: { 
+      type: String,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
