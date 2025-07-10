@@ -19,7 +19,7 @@ router.get("/", getAllProducts);
 router.post("/", authenticateUser, roleMiddleware("admin"), upload.single("image"), addProduct);
 
 //  PUT - Admin only
-router.put("/:id", authenticateUser, roleMiddleware("admin"), updateProduct);
+router.put("/:id", authenticateUser, roleMiddleware("admin"), upload.single("image"), updateProduct);
 
 // DELETE - Admin only
 router.delete("/:id", authenticateUser, roleMiddleware("admin"), deleteProduct);

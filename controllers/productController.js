@@ -1,6 +1,5 @@
 const Product = require("../models/product");
 
-// ➕ Add Product (Admin only)
 const addProduct = async (req, res) => {
   try {
     const { name, description, price } = req.body;
@@ -32,7 +31,6 @@ const addProduct = async (req, res) => {
   }
 };
 
-// 👁️ Get All Products (Public)
 const getAllProducts = async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
@@ -42,15 +40,26 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-// ✏️ Update Product (Admin only)
 const updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
     const { name, description, price } = req.body;
 
+    const updateFields = {
+      name,
+      description,
+      price,
+    };
+
+    // If image is included in the request
+    if (req.file) {
+      const imageBase64 = req.file.buffer.toString("base64");
+      updateFields.imageBase64 = imageBase64;
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
-      { name, description, price },
+      updateFields,
       { new: true }
     );
 
@@ -67,7 +76,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-// ❌ Delete Product (Admin only)
+
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
